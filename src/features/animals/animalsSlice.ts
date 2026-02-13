@@ -1,92 +1,49 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  fetchAnimalsAPI,
-  createAnimalAPI,
-  updateAnimalAPI,
-  deleteAnimalAPI,
-} from "./animalsAPI";
-import type { Animal, AnimalState } from "./types";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import type{ Animal } from './types';
 
-const initialState: AnimalState = {
-  animals: [],
+// 1. ექსპორტი აუცილებელია აქ!
+export const fetchAnimals = createAsyncThunk(
+  'animals/fetchAnimals',
+  async () => {
+    // აქ დროებით დავაბრუნოთ ცარიელი მასივი ან იმიტირებული მონაცემები, 
+    // სანამ რეალურ API-ს მივაბამთ
+    return [] as Animal[]; 
+  }
+);
+
+interface AnimalsState {
+  items: Animal[];
+  loading: boolean;
+}
+
+const initialState: AnimalsState = {
+  items: [],
   loading: false,
-  error: null,
 };
 
-// 🔥 THUNKS
-
-export const fetchAnimals = createAsyncThunk(
-  "animals/fetchAnimals",
-  async () => {
-    return await fetchAnimalsAPI();
-  }
-);
-
-export const createAnimal = createAsyncThunk(
-  "animals/createAnimal",
-  async (animal: Omit<Animal, "id">) => {
-    return await createAnimalAPI(animal);
-  }
-);
-
-export const updateAnimal = createAsyncThunk(
-  "animals/updateAnimal",
-  async (animal: Animal) => {
-    return await updateAnimalAPI(animal);
-  }
-);
-
-export const deleteAnimal = createAsyncThunk(
-  "animals/deleteAnimal",
-  async (id: number) => {
-    return await deleteAnimalAPI(id);
-  }
-);
-
-// 🔥 SLICE
-
 const animalsSlice = createSlice({
-  name: "animals",
+  name: 'animals',
   initialState,
-  reducers: {},
+  reducers: {
+    addAnimal: (state, action: PayloadAction<Animal>) => {
+      state.items.push(action.payload);
+    },
+    deleteAnimal: (state, action: PayloadAction<string>) => {
+      state.items = state.items.filter(a => a.id !== action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
-
-      // FETCH
       .addCase(fetchAnimals.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchAnimals.fulfilled, (state, action) => {
+      .addCase(fetchAnimals.fulfilled, (state, action: PayloadAction<Animal[]>) => {
         state.loading = false;
-        state.animals = action.payload;
-      })
-      .addCase(fetchAnimals.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || "Error fetching animals";
-      })
-
-      // CREATE
-      .addCase(createAnimal.fulfilled, (state, action) => {
-        state.animals.push(action.payload);
-      })
-
-      // UPDATE
-      .addCase(updateAnimal.fulfilled, (state, action) => {
-        const index = state.animals.findIndex(
-          (a) => a.id === action.payload.id
-        );
-        if (index !== -1) {
-          state.animals[index] = action.payload;
-        }
-      })
-
-      // DELETE
-      .addCase(deleteAnimal.fulfilled, (state, action) => {
-        state.animals = state.animals.filter(
-          (a) => a.id !== action.payload
-        );
+        state.items = action.payload;
       });
   },
 });
 
+export const { addAnimal, deleteAnimal } = animalsSlice.actions;
 export default animalsSlice.reducer;

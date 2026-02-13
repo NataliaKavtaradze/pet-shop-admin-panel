@@ -1,92 +1,55 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  fetchCategoriesAPI,
-  createCategoryAPI,
-  updateCategoryAPI,
-  deleteCategoryAPI,
-} from "./categoriesApi";
-import type{ Category } from "./types";
-import type { CategoryState } from "./types";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'; 
+import type { PayloadAction } from '@reduxjs/toolkit';
+import type { Category } from '../animals/types';
 
-const initialState: CategoryState = {
-  categories: [],
+
+interface CategoriesState {
+  items: Category[];
+  loading: boolean;
+}
+
+const initialState: CategoriesState = {
+  items: [],
   loading: false,
-  error: null,
 };
 
-// 🔥 THUNKS
-
 export const fetchCategories = createAsyncThunk(
-  "categories/fetchCategories",
+  'categories/fetchCategories',
   async () => {
-    return await fetchCategoriesAPI();
-  }
-);
-
-export const createCategory = createAsyncThunk(
-  "categories/createCategory",
-  async (category: Omit<Category, "id">) => {
-    return await createCategoryAPI(category);
-  }
-);
-
-export const updateCategory = createAsyncThunk(
-  "categories/updateCategory",
-  async (category: Category) => {
-    return await updateCategoryAPI(category);
-  }
-);
-
-export const deleteCategory = createAsyncThunk(
-  "categories/deleteCategory",
-  async (id: number) => {
-    return await deleteCategoryAPI(id);
+    // აქ უნდა იყოს შენი ლოკალური API-ს მისამართი
+    const response = await fetch('http://localhost:3001/categories'); 
+    if (!response.ok) throw new Error('Failed to fetch');
+    return (await response.json()) as Category[];
   }
 );
 
 const categoriesSlice = createSlice({
-  name: "categories",
+  name: 'categories',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-
-      // FETCH
-      .addCase(fetchCategories.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(fetchCategories.fulfilled, (state, action) => {
-        state.loading = false;
-        state.categories = action.payload;
-      })
-      .addCase(fetchCategories.rejected, (state, action) => {
-        state.loading = false;
-        state.error =
-          action.error.message || "Error fetching categories";
-      })
-
-      // CREATE
-      .addCase(createCategory.fulfilled, (state, action) => {
-        state.categories.push(action.payload);
-      })
-
-      // UPDATE
-      .addCase(updateCategory.fulfilled, (state, action) => {
-        const index = state.categories.findIndex(
-          (c) => c.id === action.payload.id
-        );
-        if (index !== -1) {
-          state.categories[index] = action.payload;
-        }
-      })
-
-      // DELETE
-      .addCase(deleteCategory.fulfilled, (state, action) => {
-        state.categories = state.categories.filter(
-          (c) => c.id !== action.payload
-        );
-      });
-  },
+  reducers: {
+    // კატეგორიის დამატება
+    createCategory: (state, action: PayloadAction<Category>) => {
+      state.items.push(action.payload);
+    },
+    // კატეგორიის განახლება (Update) - აი ეს აკლდა სავარაუდოდ
+    updateCategory: (state, action: PayloadAction<Category>) => {
+      const index = state.items.findIndex(cat => cat.id === action.payload.id);
+      if (index !== -1) {
+        state.items[index] = action.payload;
+      }
+    },
+    // კატეგორიის წაშლა
+    deleteCategory: (state, action: PayloadAction<string>) => {
+      state.items = state.items.filter(cat => cat.id !== action.payload);
+    },
+    // სრული სიის ჩასმა (მაგალითად API-დან წამოღებისას)
+    setCategories: (state, action: PayloadAction<Category[]>) => {
+      state.items = action.payload;
+    }
+  }
 });
+
+// ექსპორტი აუცილებელია, რომ სხვა ფაილებმა დაინახონ ეს ფუნქციები
+export const { createCategory, updateCategory, deleteCategory, setCategories } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;
