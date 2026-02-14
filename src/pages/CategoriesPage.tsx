@@ -1,143 +1,76 @@
-import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import {
-  fetchCategories,
-  createCategory,
-  updateCategory,
-  deleteCategory,
-} from "../features/categories/categoriesSlice";
-import type { Category } from "../features/categories/types";
-
-const Container = styled.div`
-  padding: 40px;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 400px;
-  margin-bottom: 30px;
-`;
-
-const Input = styled.input`
-  padding: 8px;
-`;
-
-const Button = styled.button`
-  padding: 8px;
-  cursor: pointer;
-`;
-
-const Card = styled.div`
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-`;
+import  { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { fetchCategories, deleteCategory } from '../features/categories/categoriesSlice';
+import { toast } from 'react-toastify';
+import { fetchAnimals } from '../features/animals/animalsSlice';
+import './CategoriesPage.css';
 
 const CategoriesPage = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { categories } = useAppSelector(
-    (state) => state.categories
-  );
+  
+  // ვიღებთ კატეგორიებს და ცხოველებს (რომ დავითვალოთ რამდენი ცხოველია თითო კატეგორიაში)
+  const { items: categories } = useAppSelector((state) => state.categories);
+  const { items: animals } = useAppSelector((state) => state.animals);
 
-  const [editingCategory, setEditingCategory] =
-    useState<Category | null>(null);
+   useEffect(() => {
+  dispatch(fetchCategories());
+  dispatch(fetchAnimals()); // <--- ესეც საჭიროა, რომ .filter-მა იმუშაოს
+}, [dispatch]);
 
-  const [formData, setFormData] = useState<
-    Omit<Category, "id">
-  >({
-    title: "",
-    description: "",
-  });
-
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (editingCategory) {
-      const { id, ...rest } = editingCategory;
-      setFormData(rest);
+  const handleDelete = (id: string) => {
+    if (window.confirm("ნამდვილად გსურთ კატეგორიის წაშლა?")) {
+      dispatch(deleteCategory(id));
+      toast.error("კატეგორია წაიშალა");
     }
-  }, [editingCategory]);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (editingCategory) {
-      dispatch(
-        updateCategory({
-          id: editingCategory.id,
-          ...formData,
-        })
-      );
-      setEditingCategory(null);
-    } else {
-      dispatch(createCategory(formData));
-    }
-
-    setFormData({ title: "", description: "" });
   };
 
   return (
-    <Container>
-      <h1>Categories Admin</h1>
+    <div className="admin-container">
+      {/* Header */}
+      <header className="admin-header">
+        <h1 className="header">🐾 Pet Shop Admin Panel</h1>
+        <p>Manage your pets and categories with elegance</p>
+      </header>
 
-      <Form onSubmit={handleSubmit}>
-        <Input
-          name="title"
-          placeholder="Title"
-          value={formData.title}
-          onChange={handleChange}
-        />
-        <Input
-          name="description"
-          placeholder="Description"
-          value={formData.description}
-          onChange={handleChange}
-        />
-        <Button type="submit">
-          {editingCategory
-            ? "Update Category"
-            : "Add Category"}
-        </Button>
-      </Form>
+      {/* Navigation Tabs */}
+      <nav className="admin-nav">
+        <a href="#" className="nav-tab active" onClick={() => navigate('/admin/pets')}>Pets</a>
+        <a href="#" className="nav-tab active">Categories</a>
+        <a href="#" className="nav-tab" onClick={() => navigate('/admin/add-pet')}>Add Pet</a>
+        <a href="#" className="nav-tab" onClick={() => navigate('/admin/add-category')}>Add Category</a>
+      </nav>
 
-      {categories.map((category) => (
-        <Card key={category.id}>
-          <h3>{category.title}</h3>
-          <p>{category.description}</p>
+      <main className="admin-main">
+        <div className="list-header">
+          <h2>All Categories</h2>
+          <button className="add-new-btn" onClick={() => navigate('/admin/add-category')}>
+            + Add New Category
+          </button>
+        </div>
 
-          <Button
-            onClick={() =>
-              setEditingCategory(category)
-            }
-          >
-            Edit
-          </Button>
+        <div className="categories-grid">
+          {categories?.map((cat) => {
+            // ვითვლით რამდენი ცხოველია ამ კატეგორიაში
+            const petCount = animals.filter(a => a.categoryId === cat.id).length;
 
-          <Button
-            onClick={() =>
-              dispatch(deleteCategory(category.id))
-            }
-          >
-            Delete
-          </Button>
-        </Card>
-      ))}
-    </Container>
+            return (
+              <div key={cat.id} className="category-card">
+                <h3>{cat.title}</h3>
+                <p className="cat-desc">{cat.description}</p>
+                <span className="pet-count">{petCount} {petCount === 1 ? 'pet' : 'pets'}</span>
+                
+                <div className="card-actions">
+                  <button className="edit-btn" onClick={() => toast.warning("Edit coming soon")}>Edit</button>
+                  <button className="delete-btn" onClick={() => handleDelete(cat.id)}>Delete</button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </main>
+    </div>
   );
 };
 

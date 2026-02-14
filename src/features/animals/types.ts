@@ -1,12 +1,12 @@
 export interface Animal {
-  id: number;
+  id: string;
   name: string;
   priceUSD: number;
   priceGEL: number;
+  stock: number;
   description: string;
   isPopular: boolean;
-  stock: number;
-  imageUrl?: string;
+  categoryId: string;
 }
 
 export interface AnimalState {
@@ -15,7 +15,7 @@ export interface AnimalState {
   error: string | null;
 }
 export interface Category {
-  id: number;
+  id: string;
   title: string;
   description: string;
 }

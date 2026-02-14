@@ -1,5 +1,24 @@
 {
-  "animals": [],
-  "categories": [],
-  "animals_with_categories": []
+  "categories": [
+    {
+      "id": "1",
+      "title": "Dogs",
+      "description": "Loyal and friendly companions perfect for families"
+    },
+    {
+      "id": "2",
+      "title": "Cats",
+      "description": "Independent and graceful pets with unique personalities"
+    },
+    {
+      "id": "3",
+      "title": "Birds",
+      "description": "Colorful and melodious friends that brighten any home"
+    },
+    {
+      "id": "4",
+      "title": "Fish",
+      "description": "Peaceful aquatic companions for relaxation"
+    }
+  ]
 }
