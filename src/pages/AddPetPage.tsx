@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { addAnimal } from '../features/animals/animalsSlice';
@@ -9,7 +9,7 @@ const AddPetPage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const categories = useAppSelector((state) => state.categories.items);
-
+      
   const [form, setForm] = useState({
     name: '',
     categoryId: '',
@@ -26,6 +26,7 @@ const AddPetPage: React.FC = () => {
     const newPet = {
       id: crypto.randomUUID(),
       name: form.name,
+      categoryId: form.categoryId, 
       priceUSD: Number(form.priceUSD),
       priceGEL: Number(form.priceGEL),
       stock: Number(form.stock),
@@ -35,9 +36,10 @@ const AddPetPage: React.FC = () => {
 
     dispatch(addAnimal(newPet));
     toast.success("Pet added successfully!");
-    navigate('/admin/pets'); // დაბრუნება მთავარ სიაზე
-  };
+    navigate('/admin/pets');
+  }; // <--- აი აქ უნდა იხურებოდეს handleSubmit
 
+  // ახლა return არის AddPetPage ფუნქციის შიგნით
   return (
     <div className="add-pet-container">
       <button className="back-btn" onClick={() => navigate(-1)}>← Back to Pets</button>
@@ -45,6 +47,7 @@ const AddPetPage: React.FC = () => {
       <div className="form-card">
         <h2>Add New Pet</h2>
         <form onSubmit={handleSubmit}>
+          {/* ... ფორმის შიგთავსი (ინპუტები) ... */}
           <div className="input-group">
             <label>Pet Name</label>
             <input type="text" required value={form.name} 
@@ -101,6 +104,6 @@ const AddPetPage: React.FC = () => {
       </div>
     </div>
   );
-};
+}; // <--- ეს არის AddPetPage-ის დასასრული
 
 export default AddPetPage;
