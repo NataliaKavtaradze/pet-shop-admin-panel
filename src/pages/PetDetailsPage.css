@@ -1,0 +1,144 @@
+/* მთავარი კონტეინერი */
+.details-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* რბილი ჩრდილი */
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* ზედა სექცია (სურათი და ინფორმაცია გვერდიგვერდ) */
+.details-main {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+/* სურათის ბლოკი (ნაცრისფერი კვადრატი) */
+.details-image-box {
+  flex: 0 0 300px;
+  height: 300px;
+  background-color: #f0f4f8;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 80px; /* სტიკერის ზომა */
+}
+
+/* ინფორმაციის ბლოკი */
+.details-info {
+  flex: 1;
+}
+
+.details-info h1 {
+  font-size: 32px;
+  color: #1a202c;
+  margin-bottom: 15px;
+}
+
+/* კატეგორიის Badge */
+.category-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background-color: #4a6fa5;
+  color: white;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+/* ფასების და მარაგის ბლოკები (Grid) */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.stat-item {
+  border: 1px solid #e2e8f0;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  color: #718096;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #2d3748;
+}
+
+.stat-value.price {
+  color: #38a169; /* მწვანე ფასი */
+}
+
+/* Popular Pet Label */
+.popular-tag {
+  display: inline-block;
+  background-color: #fffaf0;
+  color: #dd6b20;
+  border: 1px solid #fbd38d;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* აღწერის სექცია */
+.description-section h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #2d3748;
+}
+
+.description-text {
+  line-height: 1.6;
+  color: #4a5568;
+  background-color: #f7fafc;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* ღილაკების სექცია */
+.details-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn-edit, .btn-delete {
+  padding: 10px 25px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+}
+
+.btn-edit {
+  background-color: #4a6fa5;
+  color: white;
+}
+
+.btn-delete {
+  background-color: #e53e3e;
+  color: white;
+}
+
+.btn-edit:hover, .btn-delete:hover {
+  opacity: 0.9;
+}

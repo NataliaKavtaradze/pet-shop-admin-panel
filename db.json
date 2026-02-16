@@ -20,5 +20,84 @@
       "title": "Fish",
       "description": "Peaceful aquatic companions for relaxation"
     }
+  ],
+  "animals_with_categories": [
+    {
+      "id": "1",
+      "animal_id": "pet-123",
+      "category_id": "cat-456"
+    },
+    {
+      "id": "a727ca4a-8af2-4347-ba45-61f8bffeb982",
+      "animal_id": "a15a6a4b-8087-4f24-8822-8e44dc1dc6ff",
+      "category_id": "1"
+    },
+    {
+      "id": "88be6edc-61eb-4c51-86bb-9cb92386b806",
+      "animal_id": "11f096e9-e597-4741-b405-358b660ed521",
+      "category_id": "2"
+    },
+    {
+      "id": "2af69219-9f22-44e9-9a83-fbc19f56192f",
+      "animal_id": "8280bb52-0bef-48c9-80f9-9867f59c0a03",
+      "category_id": "1"
+    },
+    {
+      "id": "26f3d9c6-a7f6-4f80-b9f9-ba8917f45e58",
+      "animal_id": "60d443c7-b739-4b54-85dc-bfead1e5eb7a",
+      "category_id": "1"
+    },
+    {
+      "id": "0c885cdd-4381-4d12-86f6-bf86b1489583",
+      "animal_id": "1057c772-16ea-4b0f-90eb-2a2cde0bd8d9",
+      "category_id": "2"
+    },
+    {
+      "id": "208ecff4-47a2-4163-9db0-6dd23ae5b122",
+      "animal_id": "ae18bf02-93b8-4ce3-9d52-7ca4cbd8a0ea",
+      "category_id": "1"
+    }
+  ],
+  "animals": [
+    {
+      "id": "1",
+      "name": "Golden Retriever",
+      "categoryId": "dog",
+      "priceUSD": 800,
+      "priceGEL": 2100,
+      "stock": 3,
+      "description": "Friendly, intelligent, and devoted dogs. Great family pets that love children and are highly trainable. These beautiful golden companions bring joy and loyalty to every household.",
+      "isPopular": true
+    },
+    {
+      "id": "3",
+      "name": "German Shepherd",
+      "categoryId": "Birds",
+      "priceUSD": 120,
+      "priceGEL": 315,
+      "stock": 8,
+      "description": "Beautiful singing birds that bring joy to any home. Easy to care for and delightful companions. Their melodious songs create a peaceful atmosphere.",
+      "isPopular": true
+    },
+    {
+      "id": "4",
+      "name": "Siamese Cat",
+      "categoryId": "Fish",
+      "priceUSD": 26,
+      "priceGEL": 65,
+      "stock": 15,
+      "description": "Low-maintenance pets perfect for beginners. Beautiful and peaceful aquatic companions that provide a calming presence in any space.",
+      "isPopular": true
+    },
+    {
+      "id": "ae18bf02-93b8-4ce3-9d52-7ca4cbd8a0ea",
+      "name": "avav",
+      "categoryId": "1",
+      "priceUSD": 1,
+      "priceGEL": 1,
+      "stock": 3,
+      "description": "ADVAVA",
+      "isPopular": true
+    }
   ]
 }

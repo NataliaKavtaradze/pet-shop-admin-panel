@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import { addAnimal } from '../features/animals/animalsSlice';
+import { createAnimal } from '../features/animals/animalsSlice';
 import { toast } from 'react-toastify';
 import './AddPetPage.css';
 
@@ -20,27 +20,64 @@ const AddPetPage: React.FC = () => {
     isPopular: false
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    const newPet = {
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  const animalId = crypto.randomUUID();
+
+  // ვიყენებთ form.xxx რადგან შენთან ასეა განსაზღვრული
+  const newPet = {
+    id: animalId,
+    name: form.name,
+    categoryId: form.categoryId,
+    priceUSD: Number(form.priceUSD),
+    priceGEL: Number(form.priceGEL),
+    stock: Number(form.stock),
+    description: form.description,
+    isPopular: form.isPopular,
+  };
+
+  try {
+    // 1. ვიძახებთ createAnimal-ს (რომელიც POST-ს აკეთებს)
+    await dispatch(createAnimal(newPet)).unwrap();
+
+    // 2. ვამატებთ კავშირს (ესეც POST-ია)
+    const linkData = {
       id: crypto.randomUUID(),
-      name: form.name,
-      categoryId: form.categoryId, 
-      priceUSD: Number(form.priceUSD),
-      priceGEL: Number(form.priceGEL),
-      stock: Number(form.stock),
-      description: form.description,
-      isPopular: form.isPopular,
+      animal_id: animalId,
+      category_id: form.categoryId
     };
 
-    dispatch(addAnimal(newPet));
+    await fetch('http://localhost:3001/animals_with_categories', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(linkData)
+    });
+
     toast.success("Pet added successfully!");
     navigate('/admin/pets');
-  }; // <--- აი აქ უნდა იხურებოდეს handleSubmit
+  } catch (error) {
+    toast.error("Failed to add pet");
+  }
+};
 
-  // ახლა return არის AddPetPage ფუნქციის შიგნით
+  
   return (
+   <div  className="admin-container">
+        <header className="admin-header">
+       <h1 className="header">🐾 Pet Shop Admin Panel</h1>
+        <p>Manage your pets and categories with elegance</p>
+      </header>
+
+          <nav className="admin-nav">
+        <button className="nav-tab " onClick={() => navigate('/admin/pets')}>Pets</button>
+        <button className="nav-tab " onClick={() => navigate('/admin/categories')}>Categories</button>
+        <button className="nav-tab active" onClick={() => navigate('/admin/add-pet')}>Add Pet</button>
+        <button className="nav-tab ">Add Category</button>
+      </nav>
+
+             <button className="btn back-link active" onClick={() => navigate('/admin/pets')}>
+          ← Back to Pets
+        </button>
     <div className="add-pet-container">
       <button className="back-btn" onClick={() => navigate(-1)}>← Back to Pets</button>
       
@@ -103,7 +140,10 @@ const AddPetPage: React.FC = () => {
         </form>
       </div>
     </div>
+    </div>  
   );
-}; // <--- ეს არის AddPetPage-ის დასასრული
+}; 
+  
+    
 
 export default AddPetPage;

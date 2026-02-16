@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { deleteAnimal } from './animalsSlice';
 import { toast } from 'react-toastify';
