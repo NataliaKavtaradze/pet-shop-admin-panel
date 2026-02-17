@@ -9,10 +9,9 @@ interface PetCardProps {
 }
 
 const PetCard: React.FC<PetCardProps> = ({ animal, onDelete }) => {
-  // 1. სთეითი უნდა იყოს ფუნქციის შიგნით!
+  
   const [quantity, setQuantity] = useState<number>(1);
 
-  // 2. ფუნქცია უნდა იყოს ფუნქციის შიგნით!
   const handleIncrement = () => {
     if (quantity < animal.stock) {
       setQuantity(prev => prev + 1);
@@ -55,8 +54,7 @@ const PetCard: React.FC<PetCardProps> = ({ animal, onDelete }) => {
         <span className="stock">Stock: {animal.stock}</span>
       </div>
 
-      {/* წაშლის ღილაკი - გამოჩნდება მხოლოდ თუ onDelete ფუნქცია არსებობს */}
-      {onDelete && (
+           {onDelete && (
         <button 
           className="delete-btn" 
           onClick={() => onDelete(animal.id)}

@@ -6,7 +6,7 @@ import categoriesReducer from '../features/categories/categoriesSlice';
 export const store = configureStore({
   reducer: {
     animals: animalsReducer,
-    categories: categoriesReducer, // <--- აი ეს აუცილებელია
+    categories: categoriesReducer,
   },
 });
 

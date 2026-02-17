@@ -39,7 +39,7 @@ export const removeAnimalFromServer = createAsyncThunk(
     await fetch(`http://localhost:3001/animals/${id}`, {
       method: 'DELETE',
     });
-    return id; // ვაბრუნებთ ID-ს, რომ სთეითიდანაც ამოვშალოთ
+    return id; 
   }
 );
 export const updateAnimal = createAsyncThunk(
@@ -75,11 +75,11 @@ const animalsSlice = createSlice({
 extraReducers: (builder) => {
   builder
     .addCase(fetchAnimals.pending, (state) => {
-      state.loading = true; // სანამ მონაცემები მოვა
+      state.loading = true; 
     })
     .addCase(fetchAnimals.fulfilled, (state, action) => {
       state.loading = false;
-      state.items = action.payload; // ანაცვლებს ძველს ახლით, გაორმაგება აღარ მოხდება
+      state.items = action.payload; 
     })
     .addCase(createAnimal.fulfilled, (state, action) => {
   state.items.push(action.payload);
@@ -90,7 +90,7 @@ extraReducers: (builder) => {
   .addCase(updateAnimal.fulfilled, (state, action) => {
   const index = state.items.findIndex(item => item.id === action.payload.id);
   if (index !== -1) {
-    state.items[index] = action.payload; // ანაცვლებს ძველ მონაცემს ახლით
+    state.items[index] = action.payload; 
   }
   })
     .addCase(fetchAnimals.rejected, (state) => {

@@ -11,17 +11,16 @@ import EditPetPage from "./pages/EditPetPage";
 function App() {
   return (
     <Router>
-      {/* ToastContainer აუცილებელია შეტყობინებების გამოსაჩენად */}
+
       <ToastContainer position="top-right" autoClose={3000} />
       
       <Routes>
-        {/* მთავარი ადმინ პანელი - ცხოველების სია */}
+       
         <Route path="/admin/pets" element={<AnimalsPage />} />
         
-        {/* ცხოველის დამატების გვერდი */}
+  
         <Route path="/admin/add-pet" element={<AddPetPage />} />
-        
-        {/* კატეგორიების მართვის გვერდი */}
+   
         <Route path="/admin/categories" element={<CategoriesPage />} />
         
         <Route path="/admin/add-category" element={<AddCategoryPage />} />

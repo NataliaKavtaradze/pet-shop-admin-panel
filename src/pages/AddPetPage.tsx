@@ -24,7 +24,7 @@ const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   const animalId = crypto.randomUUID();
 
-  // ვიყენებთ form.xxx რადგან შენთან ასეა განსაზღვრული
+  
   const newPet = {
     id: animalId,
     name: form.name,
@@ -37,10 +37,10 @@ const handleSubmit = async (e: React.FormEvent) => {
   };
 
   try {
-    // 1. ვიძახებთ createAnimal-ს (რომელიც POST-ს აკეთებს)
+  
     await dispatch(createAnimal(newPet)).unwrap();
 
-    // 2. ვამატებთ კავშირს (ესეც POST-ია)
+   
     const linkData = {
       id: crypto.randomUUID(),
       animal_id: animalId,
@@ -84,8 +84,7 @@ const handleSubmit = async (e: React.FormEvent) => {
       <div className="form-card">
         <h2>Add New Pet</h2>
         <form onSubmit={handleSubmit}>
-          {/* ... ფორმის შიგთავსი (ინპუტები) ... */}
-          <div className="input-group">
+                 <div className="input-group">
             <label>Pet Name</label>
             <input type="text" required value={form.name} 
               onChange={e => setForm({...form, name: e.target.value})} />

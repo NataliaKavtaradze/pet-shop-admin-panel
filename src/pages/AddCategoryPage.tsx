@@ -18,8 +18,8 @@ const AddCategoryPage: React.FC = () => {
 
   const newCategory = {
     id: crypto.randomUUID(),
-    title: title,        // პირდაპირ სთეითიდან
-    description: description, // პირდაპირ სთეითიდან
+    title: title,        
+    description: description, 
   };
 
   dispatch(createCategory(newCategory));

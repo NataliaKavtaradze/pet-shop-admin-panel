@@ -11,14 +11,13 @@
   gap: 30px;
 }
 
-/* ზედა სექცია (სურათი და ინფორმაცია გვერდიგვერდ) */
+
 .details-main {
   display: flex;
   gap: 40px;
   align-items: flex-start;
 }
 
-/* სურათის ბლოკი (ნაცრისფერი კვადრატი) */
 .details-image-box {
   flex: 0 0 300px;
   height: 300px;
@@ -30,7 +29,6 @@
   font-size: 80px; /* სტიკერის ზომა */
 }
 
-/* ინფორმაციის ბლოკი */
 .details-info {
   flex: 1;
 }
@@ -41,7 +39,7 @@
   margin-bottom: 15px;
 }
 
-/* კატეგორიის Badge */
+
 .category-badge {
   display: inline-block;
   padding: 6px 16px;
@@ -52,7 +50,7 @@
   margin-bottom: 25px;
 }
 
-/* ფასების და მარაგის ბლოკები (Grid) */
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -97,7 +95,7 @@
   font-weight: 600;
 }
 
-/* აღწერის სექცია */
+
 .description-section h3 {
   font-size: 18px;
   margin-bottom: 12px;
@@ -112,7 +110,7 @@
   border-radius: 8px;
 }
 
-/* ღილაკების სექცია */
+
 .details-actions {
   display: flex;
   justify-content: center;

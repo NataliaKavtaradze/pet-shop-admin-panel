@@ -10,13 +10,13 @@ const CategoriesPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   
-  // ვიღებთ კატეგორიებს და ცხოველებს (რომ დავითვალოთ რამდენი ცხოველია თითო კატეგორიაში)
+
   const { items: categories } = useAppSelector((state) => state.categories);
   const { items: animals } = useAppSelector((state) => state.animals);
 
    useEffect(() => {
   dispatch(fetchCategories());
-  dispatch(fetchAnimals()); // <--- ესეც საჭიროა, რომ .filter-მა იმუშაოს
+  dispatch(fetchAnimals()); 
 }, [dispatch]);
 
   const handleDelete = (id: string) => {

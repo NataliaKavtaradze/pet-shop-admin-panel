@@ -54,11 +54,11 @@ const handleSubmit = async (e: React.FormEvent) => {
       stock: Number(form.stock),
     };
 
-    // ვიძახებთ Thunk-ს, რომელიც PUT-ს აკეთებს სერვერზე
+    
     await dispatch(updateAnimal(updatedPet)).unwrap();
     
     toast.success("მონაცემები წარმატებით განახლდა!");
-    navigate(`/admin/pets/${id}`); // ვაბრუნებთ დეტალების გვერდზე
+    navigate(`/admin/pets/${id}`);
   } catch (error) {
     toast.error("განახლება ვერ მოხერხდა");
   }
@@ -70,7 +70,6 @@ const handleSubmit = async (e: React.FormEvent) => {
     }
   }, [dispatch, animals.length]);
 
-  // ფორმის შევსების ლოგიკა იგივე რჩება
   useEffect(() => {
     if (animal) {
       setForm({

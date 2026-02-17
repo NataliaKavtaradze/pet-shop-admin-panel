@@ -31,7 +31,7 @@ export const removeCategory = createAsyncThunk(
     await fetch(`http://localhost:3001/categories/${id}`, {
       method: 'DELETE',
     });
-    return id; // ვაბრუნებთ ID-ს, რომ სთეითიდანაც ამოვშალოთ
+    return id;
   }
 );
 

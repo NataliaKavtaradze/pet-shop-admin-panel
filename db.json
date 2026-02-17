@@ -6,11 +6,6 @@
       "description": "Loyal and friendly companions perfect for families"
     },
     {
-      "id": "2",
-      "title": "Cats",
-      "description": "Independent and graceful pets with unique personalities"
-    },
-    {
       "id": "3",
       "title": "Birds",
       "description": "Colorful and melodious friends that brighten any home"
@@ -56,6 +51,11 @@
       "id": "208ecff4-47a2-4163-9db0-6dd23ae5b122",
       "animal_id": "ae18bf02-93b8-4ce3-9d52-7ca4cbd8a0ea",
       "category_id": "1"
+    },
+    {
+      "id": "c2c2167a-ff1f-4727-bbdf-7b6816b7fe4b",
+      "animal_id": "5b24ed46-f1c2-41a8-9894-5fca3365b6aa",
+      "category_id": "2"
     }
   ],
   "animals": [
@@ -87,16 +87,6 @@
       "priceGEL": 65,
       "stock": 15,
       "description": "Low-maintenance pets perfect for beginners. Beautiful and peaceful aquatic companions that provide a calming presence in any space.",
-      "isPopular": true
-    },
-    {
-      "id": "ae18bf02-93b8-4ce3-9d52-7ca4cbd8a0ea",
-      "name": "avav",
-      "categoryId": "1",
-      "priceUSD": 1,
-      "priceGEL": 1,
-      "stock": 3,
-      "description": "ADVAVA",
       "isPopular": true
     }
   ]
