@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import  { useState} from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { addAnimal } from './animalsSlice';
 import { toast } from 'react-toastify';
@@ -6,8 +6,7 @@ import { toast } from 'react-toastify';
 const AnimalForm: React.FC = () => {
   const dispatch = useAppDispatch();
   
-  // ვიღებთ კატეგორიებს სთორიდან (დარწმუნდი რომ categoriesSlice გაქვს)
-  const categories = useAppSelector((state) => state.categories.items);
+   const categories = useAppSelector((state) => state.categories.items);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -28,7 +27,7 @@ const AnimalForm: React.FC = () => {
     }
 
     const newAnimal = {
-      id: crypto.randomUUID(), // ბრაუზერის ჩაშენებული მეთოდი ID-სთვის
+      id: crypto.randomUUID(), 
       name: formData.name,
       priceUSD: Number(formData.priceUSD),
       priceGEL: Number(formData.priceGEL),
@@ -40,7 +39,7 @@ const AnimalForm: React.FC = () => {
     dispatch(addAnimal(newAnimal));
     toast.success("ცხოველი დაემატა!");
     
-    // ფორმის გასუფთავება
+    
     setFormData({ name: '', priceUSD: '', priceGEL: '', description: '', isPopular: false, stock: '', categoryId: '' });
   };
 

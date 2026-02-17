@@ -1,17 +1,85 @@
+.admin-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+ }
+
+.admin-header {
+background: #ffffff;
+border: 1px solid #E2E8F0;
+border-radius: 12px;
+padding: 40px;
+margin-bottom: 40px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+text-align: center;
+ }
+ .header h1 {
+  font-size: 2.5rem;
+  color: #2D3748;
+  margin-bottom: 12px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+ }
+ .header p {
+  font-size: 1.125rem;
+  color: #718096;
+ font-weight: 400;
+ }
+
+.admin-nav {
+  display: flex;
+  background-color: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 8px;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.nav-tab.active, .nav-tab:hover {
+    background: #4A6FA5;
+    color: white;
+}
+.nav-tab {
+    flex: 1;
+    padding: 16px 24px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    color: #718096;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    font-size: 15px;
+}
+
 .form-container-centered {
   max-width: 500px;
   margin: 40px auto;
 }
 
 .back-link {
-  background: none;
-  border: none;
-  color: #718096;
-  cursor: pointer;
-  margin-bottom: 20px;
-  font-size: 0.9rem;
+      background: #EDF2F7;
+    color: #4A5568;
+    margin-bottom: 24px;
+    border: 1px solid #E2E8F0;
 }
-
+.btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 15px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    letter-spacing: 0.01em;
+}
 .form-card-white {
   background: white;
   padding: 40px;

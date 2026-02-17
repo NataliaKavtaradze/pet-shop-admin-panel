@@ -4,6 +4,7 @@ import { fetchAnimals } from '../features/animals/animalsSlice';
 import { fetchCategories } from '../features/categories/categoriesSlice';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import PetCard from '../components/PetCard';
 import './AnimalsPage.css';
 
 
@@ -11,15 +12,17 @@ const AnimalsPage = () => {
   const dispatch = useAppDispatch();
   const { items: animals, loading } = useAppSelector((state) => state.animals);
 
-if (loading) {
-  return <div className="loading-spinner">Loading pets...</div>;
-}
+
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchAnimals());
     dispatch(fetchCategories());
   }, [dispatch]);
+
+  if (loading) {
+  return <div className="loading-spinner">Loading pets...</div>;
+}
 
   return (
     <div className="admin-container">
@@ -47,26 +50,10 @@ if (loading) {
         </div>
 
         <div className="pets-grid">
-          {animals?.map((animal) => (
-            <div key={animal.id} className="pet-card">
-             <div className="pet-image">🐱</div>
-             <div className="pet-name">{animal.name}</div>
-              <div className="pet-category">{animal.categoryId}</div> {/* აქ category_id-თი უნდა წამოიღო სახელი */}
-              
-              <div className="pet-price">
-                <span className="usd">${animal.priceUSD}</span>
-                <span className="gel">₾{animal.priceGEL}</span>
-              </div>
-
-              <p className="description">{animal.description.substring(0, 60)}...</p>
-
-              <div className="card-footer">
-                {animal.isPopular && <span className="popular-label">Popular</span>}
-                <span className="stock">Stock: {animal.stock}</span>
-              </div>
-            </div>
-          ))}
-        </div>
+  {animals.map((animal) => (
+    <PetCard key={animal.id} animal={animal} />
+  ))}
+</div>
       </main>
     </div>
   );

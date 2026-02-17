@@ -6,7 +6,7 @@ export interface Animal {
   stock: number;
   description: string;
   isPopular: boolean;
-  categoryId: string;
+  categoryId?: string;
 }
 
 export interface AnimalState {

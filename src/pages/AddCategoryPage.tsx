@@ -14,42 +14,34 @@ const AddCategoryPage: React.FC = () => {
   const [description, setDescription] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!title.trim()) {
-      toast.error("გთხოვთ შეიყვანოთ სათაური");
-      return;
-    }
-
-    const newCategory = {
-      id: crypto.randomUUID(),
-      title,
-      description,
-    };
-
-    dispatch(createCategory(newCategory));
-    toast.success("კატეგორია წარმატებით დაემატა!");
-    navigate('/admin/categories'); // წარმატების შემდეგ ვბრუნდებით სიაში
+  const newCategory = {
+    id: crypto.randomUUID(),
+    title: title,        
+    description: description, 
   };
 
+  dispatch(createCategory(newCategory));
+  toast.success("კატეგორია წარმატებით დაემატა!");
+  navigate('/admin/categories'); 
+};
   return (
     <div className="admin-container">
-      {/* Header - იგივე რაც სხვა გვერდებზე */}
-      <header className="admin-header-card">
-        <h1>🐾 Pet Shop Admin Panel</h1>
+        <header className="admin-header">
+       <h1 className="header">🐾 Pet Shop Admin Panel</h1>
         <p>Manage your pets and categories with elegance</p>
       </header>
 
-      {/* Navigation - აქ Add Category იქნება active */}
-      <nav className="admin-nav-bar">
-        <button onClick={() => navigate('/admin/pets')}>Pets</button>
-        <button onClick={() => navigate('/admin/categories')}>Categories</button>
-        <button onClick={() => navigate('/admin/add-pet')}>Add Pet</button>
-        <button className="active">Add Category</button>
+          <nav className="admin-nav">
+        <button className="nav-tab " onClick={() => navigate('/admin/pets')}>Pets</button>
+        <button className="nav-tab " onClick={() => navigate('/admin/categories')}>Categories</button>
+        <button className="nav-tab" onClick={() => navigate('/admin/add-pet')}>Add Pet</button>
+        <button className="nav-tab active">Add Category</button>
       </nav>
 
       <main className="form-container-centered">
-        <button className="back-link" onClick={() => navigate('/admin/categories')}>
+        <button className="btn back-link active" onClick={() => navigate('/admin/categories')}>
           ← Back to Categories
         </button>
 

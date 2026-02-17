@@ -1,11 +1,10 @@
-import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { deleteAnimal } from './animalsSlice';
 import { toast } from 'react-toastify';
 
 const AnimalsList: React.FC = () => {
   const dispatch = useAppDispatch();
-  // სთორიდან ვიღებთ ცხოველების სიას
+  
   const animals = useAppSelector((state) => state.animals.items);
 
   const handleDelete = (id: string) => {
@@ -48,7 +47,7 @@ const AnimalsList: React.FC = () => {
                   <div className="action-buttons">
                     <button 
                       className="edit-btn" 
-                      onClick={() => toast.warning("რედაქტირება მალე დაემატება")}
+                      onClick={() => toast.warning("")}
                     >
                       🖋️
                     </button>
